@@ -23,9 +23,11 @@
 <script type="module">
     import {print_var_to_document} from "../js/utils/utils_general.js";
 
-    // todo: use the map function to get an array that doubles the value of every element in the a array
-    // todo: then print the answer to the document using print_var_to_document
+    // use the map function to get an array that doubles the value of every element in the a array
+    // then print the answer to the document using print_var_to_document
     let a = [1,2,3,4,5,6,7,8,9,10];
+    let doubleArray = a.map(number => number * 2);
+    print_var_to_document(doubleArray);
 
 </script>
 </body>

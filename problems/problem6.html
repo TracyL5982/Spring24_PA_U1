@@ -23,11 +23,31 @@
 <script type="module">
     import {ThreeEngine} from "../js/utils/utils_three.js";
 
-    // todo: using the parametric version of a circle [r*cos(\theta), r*sin(\theta)], draw a sphere (of radius 0.05, any color opacity you want)
-    // todo: in a 2D ThreeEngine scene such that it revolves around the origin (0,0) at an orbit one unit away.  One revolution around
-    // todo: the center should always take 1 second.  Also, draw a vector rooted at the origin so that it's always pointing at the sphere
-    // todo: as it revolves around the center as well.  All optional parameters for the vector can be left as the default.
-    // todo: note that sin and cosine in javascript can be called using Math.sin() and Math.cos()
+    // using the parametric version of a circle [r*cos(\theta), r*sin(\theta)], draw a sphere (of radius 0.05, any color opacity you want)
+    // in a 2D ThreeEngine scene such that it revolves around the origin (0,0) at an orbit one unit away.  One revolution around
+    // the center should always take 1 second.  Also, draw a vector rooted at the origin so that it's always pointing at the sphere
+    // as it revolves around the center as well.  All optional parameters for the vector can be left as the default.
+    // note that sin and cosine in javascript can be called using Math.sin() and Math.cos()
+        
+    const engine = ThreeEngine.new_default_2d();
+    
+    const radius = 0.05; 
+    const color = 0xff0000; 
+    const opacity = 0.9; 
+    let theta = 0;
+    const orbitRadius = 1;
+    const tailWidth = 0.01;
+    const arrowHeight = 0.15;
+    const startPoint = [0, 0, 0];
+
+    engine.animation_loop((deltaTime) => {
+        const time = engine.get_time_elapsed();
+        const x = orbitRadius * Math.cos(time * 2 * Math.PI); // 2*PI for a full circle, time for 1 second per revolution
+        const y = orbitRadius * Math.sin(time * 2 * Math.PI);
+        const endPoint = [x, y, 0];
+        engine.draw_debug_vector(startPoint, endPoint, tailWidth, arrowHeight, color, opacity);
+        engine.draw_debug_sphere (endPoint, radius, 0x0000ff, 0.6);
+    });
 
 </script>
 </body>
